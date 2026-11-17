@@ -1,0 +1,31 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-10-22T19:10:00Z"},
+  "title": "Still Camera Coach",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 2120, "w": 390, "h": 844, "title": "Interactive prototype", "is_interactive": true, "radius": 44},
+    "Audience.dc.html": {"x": 0, "y": 0, "w": 1280, "h": 1720, "title": "Who it’s for"},
+    "Principles.dc.html": {"x": 1360, "y": 0, "w": 1280, "h": 1720, "title": "Rules → screens"},
+    "Permission.dc.html": {"x": 470, "y": 2120, "w": 390, "h": 844, "title": "1 · First run", "radius": 44},
+    "Spotting.dc.html": {"x": 940, "y": 2120, "w": 390, "h": 844, "title": "2 · Spotting ideas", "radius": 44},
+    "Guiding.dc.html": {"x": 1410, "y": 2120, "w": 390, "h": 844, "title": "3 · Guide", "radius": 44},
+    "Aligned.dc.html": {"x": 1880, "y": 2120, "w": 390, "h": 844, "title": "4 · Lined up", "radius": 44},
+    "Captured.dc.html": {"x": 2350, "y": 2120, "w": 390, "h": 844, "title": "5 · Saved + what changed", "radius": 44},
+    "Hints.dc.html": {"x": 0, "y": 3940, "w": 390, "h": 844, "title": "Hints · arrows only", "radius": 44},
+    "Quiet.dc.html": {"x": 470, "y": 3940, "w": 390, "h": 844, "title": "Quiet · just the frame", "radius": 44},
+    "Unsure.dc.html": {"x": 940, "y": 3940, "w": 390, "h": 844, "title": "Not sure · says so", "radius": 44},
+    "OffTarget.dc.html": {"x": 1410, "y": 3940, "w": 390, "h": 844, "title": "Your call · shot off-idea", "radius": 44}
+  },
+  "order": ["Main.dc.html", "Audience.dc.html", "Principles.dc.html", "Permission.dc.html", "Spotting.dc.html", "Guiding.dc.html", "Aligned.dc.html", "Captured.dc.html", "Hints.dc.html", "Quiet.dc.html", "Unsure.dc.html", "OffTarget.dc.html"],
+  "notes": {
+    "title": {"x": 0, "y": -300, "text": "still · who it’s for, and what that means on screen", "kind": "title1", "maxW": 2640},
+    "flow": {"x": 0, "y": 1820, "text": "The flow", "kind": "title1", "maxW": 2740},
+    "howto": {"x": 0, "y": 3020, "w": 390, "text": "Press Play on the first board. Allow the camera and it spends a beat spotting ideas. Tap the arrow (or the sim strip on the left) to move. Get the amber dot onto the white spot: the corners close in and turn green. Tap the pill top-right to fade from Guide to Hints to Quiet.", "fill": "orange"},
+    "states": {"x": 470, "y": 3020, "w": 560, "text": "The boards to the right are the same screen frozen at each step. Every tip still comes from one written rule: compare where the phone points with the idea’s target, pick the first thing that’s off, say one move. Nothing scores the photo.", "fill": "gray"},
+    "edges": {"x": 0, "y": 3640, "text": "Less help, and the honest states", "kind": "title1", "maxW": 2740},
+    "edgesNote": {"x": 1880, "y": 3940, "w": 480, "text": "Hints and Quiet are the same screen with less help, for once someone has the eye. Not sure and Your call are the honest states: no invented tips when nothing stands out, and no scolding when someone shoots their own way.", "fill": "gray"}
+  },
+  "designSystems": []
+}
