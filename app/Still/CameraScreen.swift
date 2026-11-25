@@ -13,7 +13,10 @@ struct CameraScreen: View {
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            if camera.authorized == true {
+            if DemoStage.needed {
+                DemoStage(scene: $camera.scene)
+                thirdsGrid.allowsHitTesting(false)
+            } else if camera.authorized == true {
                 CameraPreview(session: camera.session).ignoresSafeArea()
                 thirdsGrid.allowsHitTesting(false)
             } else if camera.authorized == false {
@@ -31,7 +34,7 @@ struct CameraScreen: View {
             }
             .padding(.bottom, 24)
         }
-        .onAppear { camera.start() }
+        .onAppear { if !DemoStage.needed { camera.start() } }
         .onDisappear { camera.stop() }
         .onChange(of: camera.scene) { _, s in settle(RuleEngine.move(for: s)) }
     }

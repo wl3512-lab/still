@@ -17,6 +17,7 @@ final class Coach {
     private(set) var tier: Tier = .rules
     private var phrases: [String: String] = [:]
     private var inFlight: Set<String> = []
+    private var failures = 0
     private var makeSession: (() -> LanguageModelSession)?
 
     static let instructions = """
@@ -38,10 +39,13 @@ final class Coach {
 
     /// `preferCloud` exists only so the demo can show both paths on one phone.
     func configure(preferCloud: Bool) {
-        phrases = [:]
+        phrases = [:]; failures = 0
         if onDeviceAvailable && !preferCloud {
             tier = .onDevice
-            makeSession = { LanguageModelSession(model: SystemLanguageModel.default, instructions: Self.instructions) }
+            // Every prompt is a fixed, app-written fact (no user text), so the
+            // permissive guardrail is safe and avoids an extra filter model.
+            let local = SystemLanguageModel(guardrails: .permissiveContentTransformations)
+            makeSession = { LanguageModelSession(model: local, instructions: Self.instructions) }
         } else if canUseCloud, #available(iOS 27.0, *) {
             tier = .cloud
             let gemini = FirebaseAI.firebaseAI(backend: .googleAI())
@@ -66,8 +70,16 @@ final class Coach {
                 do {
                     let reply = try await make().respond(to: fact).content
                     let clean = reply.trimmingCharacters(in: .whitespacesAndNewlines.union(.init(charactersIn: "\"")))
+                    print("still.coach [\(tier.rawValue)] \(key) -> \(clean)")
                     if !clean.isEmpty, clean.split(separator: " ").count <= 10 { phrases[key] = clean }
+                    failures = 0
                 } catch {
+                    print("still.coach [\(tier.rawValue)] \(key) failed: \(error)")
+                    // Honest when unsure: after repeated failures, stop asking and
+                    // show the badge as Rules instead of pretending a model is on.
+                    failures += 1
+                    if failures >= 3 { tier = .rules; makeSession = nil }
+                    else { phrases[key] = move.fallback } // no retry storm for this move
                     // Offline or model busy: keep the rules text. Honest, never blocking.
                 }
             }
