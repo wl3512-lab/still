@@ -1,0 +1,30 @@
+name: Still
+options:
+  bundleIdPrefix: com.lucyliu
+  deploymentTarget:
+    iOS: "26.0"
+packages:
+  Firebase:
+    url: https://github.com/firebase/firebase-ios-sdk
+    from: 13.2.0
+targets:
+  Still:
+    type: application
+    platform: iOS
+    sources: [Still]
+    dependencies:
+      - package: Firebase
+        product: FirebaseAILogic
+      - package: Firebase
+        product: FirebaseAppCheck
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lucyliu.still
+        SWIFT_VERSION: "5.0"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_NSCameraUsageDescription: "still uses the camera to coach your framing. Nothing leaves your phone."
+        INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription: "still saves the photos you take to your library."
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        TARGETED_DEVICE_FAMILY: "1"
+        CODE_SIGN_STYLE: Automatic

@@ -1,0 +1,4 @@
+*.xcodeproj
+GoogleService-Info.plist
+build/
+DerivedData/
